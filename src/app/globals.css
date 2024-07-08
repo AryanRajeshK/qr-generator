@@ -1,33 +1,28 @@
+/* styles/globals.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-color: #000; /* Default foreground color */
+  --background-light: #808080; /* Default light mode background color */
+  --background-dark: #d6dbdc; /* Default dark mode background color */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-color: #fff; /* White foreground in dark mode */
+    --background-light: #fff; /* Light mode background in dark mode (optional) */
+    --background-dark: #808080; /* Dark mode background color */
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: #000; /* Default text color */
+  background-color: #efe4bf; /* Grey background color */
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.dark-mode {
+  background-color: var(--background-dark); /* Dark mode background */
 }
