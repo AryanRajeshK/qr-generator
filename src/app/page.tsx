@@ -22,7 +22,7 @@ export default function Home() {
         console.error('Error generating QR code:', err);
         setError(`Can't create an empty QR code :(`);
       });
-    
+
     setError(''); // Clear any previous error
   };
 
@@ -35,6 +35,11 @@ export default function Home() {
     anchor.download = `${websiteName}_qr.${fileType}`;
     anchor.click();
     setShowDropdown(false);
+  };
+
+  // Handle direct download in PNG format
+  const handleDirectDownload = () => {
+    downloadQRCode('png');
   };
 
   return (
@@ -69,17 +74,29 @@ export default function Home() {
       </button>
 
       {downloadUrl && (
-        <div className="relative mt-4">
-          <button
-            type="button"
-            onClick={() => setShowDropdown(!showDropdown)}
-            className="bg-blue-500 text-white w-[100px] h-[30px] rounded-md font-mono hover:bg-blue-700 transition-all"
-          >
-            Download
-          </button>
-          
+        <div className="relative mt-4 flex flex-col items-center">
+          <div className="flex">
+            <button
+              type="button"
+              onClick={handleDirectDownload}
+              className="bg-blue-500 text-white w-[90px] h-[30px] rounded-l-md font-mono hover:bg-blue-700 transition-all outline"
+            >
+              Download
+              
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowDropdown(!showDropdown)}
+              className="bg-blue-500 text-white w-[20px] h-[30px] rounded-r-md font-mono hover:bg-blue-700 outline"
+            >
+              <p className={`text-[15px] transition-all transform ${showDropdown ? 'rotate-180' : 'rotate-0'}`}>
+                ▼
+              </p>
+            </button>
+          </div>
+
           {showDropdown && (
-            <div className="absolute bg-white shadow-lg rounded-md mt-2 w-[100px] border-2 border-gray-400">
+            <div className="absolute bg-white shadow-lg rounded-md mb-2 w-[100px] border-2 border-gray-400 bottom-[40px]">
               <button
                 type="button"
                 onClick={() => downloadQRCode('png')}
@@ -120,7 +137,6 @@ export default function Home() {
         className="text-xs text-black absolute bottom-0 right-2 mb-2 font-mono hover:underline transition-all flex items-center opacity-60"
       >
         <img src="git.png" alt="git" className="w-4 h-4 mr-2" />
-        Aryan Rajeshkumar
       </a>
     </main>
   );
